@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#191625">
+  <title>Хованки — Славік, Даша й Катя</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="maps.js" defer></script>
+  <script src="engine.js" defer></script>
+  <script src="art.js" defer></script>
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <div class="identity">
+        <div class="logo" aria-hidden="true"><i></i></div>
+        <div>
+          <h1>Хованки<span>.</span></h1>
+          <p>Славік, Даша й Катя</p>
+        </div>
+      </div>
+      <div class="tools">
+        <button id="rules-button" class="tool" type="button"><span aria-hidden="true">?</span> Правила</button>
+        <button id="sound-button" class="tool sound" type="button" aria-label="Звук" aria-pressed="true">
+          <span class="speaker" aria-hidden="true"></span><span class="sound-label">Звук</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <section class="board panel" aria-label="Ігрове поле">
+        <div class="board-top">
+          <div class="location">
+            <span class="map-dot" aria-hidden="true"></span>
+            <div><strong id="location">Будинок</strong><span id="phase">Підготовка</span></div>
+          </div>
+          <div class="round-info">
+            <div id="crew" aria-label="Герої в раунді"></div>
+            <button id="pause-button" class="tool pause" type="button" aria-label="Призупинити гру" hidden>Ⅱ</button>
+            <span class="timer" id="timer" aria-label="Час раунду">0:45</span>
+          </div>
+        </div>
+        <div class="stage">
+          <canvas id="world" width="512" height="308" aria-label="Карта хованок. Для руху натискай WASD або стрілки. E — дія."></canvas>
+          <div class="stage-mask" id="stage-mask" hidden>
+            <div class="stage-message">
+              <span id="overlay-icon" aria-hidden="true">✦</span>
+              <h2 id="overlay-title"></h2>
+              <p id="overlay-detail"></p>
+              <button class="button primary" id="overlay-button" type="button" hidden></button>
+            </div>
+          </div>
+          <div class="objective" id="objective" hidden></div>
+        </div>
+        <div class="board-bottom">
+          <div id="status" role="status">Обирай карту, героя й роль.</div>
+          <div class="key-legend"><kbd>WASD</kbd><span>Рух</span><kbd>E</kbd><span>Дія</span></div>
+        </div>
+        <div class="touch-controls" id="touch-controls" hidden>
+          <div class="dpad" aria-label="Рух">
+            <button type="button" data-move="up" aria-label="Вгору">▲</button>
+            <button type="button" data-move="left" aria-label="Ліворуч">◀</button>
+            <button type="button" data-move="down" aria-label="Вниз">▼</button>
+            <button type="button" data-move="right" aria-label="Праворуч">▶</button>
+          </div>
+          <button type="button" class="button touch-action" id="touch-action">Дія</button>
+        </div>
+      </section>
+
+      <aside class="setup panel" aria-label="Налаштування гри">
+        <h2>Нова гра</h2>
+        <div class="options">
+          <fieldset>
+            <legend>Карта</legend>
+            <div id="maps" class="maps"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Герой</legend>
+            <div id="heroes" class="heroes"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Роль</legend>
+            <div id="roles" class="roles">
+              <button type="button" data-role="seek" aria-pressed="true">Шукати</button>
+              <button type="button" data-role="hide" aria-pressed="false">Ховатися</button>
+            </div>
+          </fieldset>
+        </div>
+        <button class="button primary start" id="start" type="button"><span aria-hidden="true">▶</span> Почати раунд</button>
+      </aside>
+    </div>
+    <footer>Один гравець · двоє друзів під керуванням гри</footer>
+  </main>
+
+  <dialog id="rules">
+    <form method="dialog">
+      <div class="dialog-heading"><h2>Правила хованок</h2><button class="tool" value="close" aria-label="Закрити">×</button></div>
+      <h3>Шукати</h3>
+      <p>Після короткого відліку знайди обох друзів за 45 секунд. Підійди до предмета й натисни <kbd>E</kbd>. Під час пошуку іноді видно блиск біля схованки, з якої долинув шурхіт.</p>
+      <h3>Ховатися</h3>
+      <p>Маєш 12 секунд, щоб знайти вільну схованку. Перечекай у ній або непомітно зміни місце. Протримайся 38 секунд, поки друг перевіряє предмети. Якщо затримаєшся поруч на видноті, тебе помітять.</p>
+      <h3>Керування</h3>
+      <p><kbd>WASD</kbd> або стрілки — рух. <kbd>E</kbd> чи <kbd>Пробіл</kbd> — перевірити предмет, сховатися або вийти. Також можна клацнути чи торкнутися підлоги або предмета. <kbd>Esc</kbd> — пауза.</p>
+      <button class="button primary" value="close">До гри</button>
+    </form>
+  </dialog>
+</body>
+</html>
